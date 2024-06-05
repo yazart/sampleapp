@@ -14,7 +14,7 @@ export class OperationsApiService {
   public uri: string;
   constructor(public http: HttpClient) {
     this.serviceName = 'OperationsApi';
-    this.uri = '/';
+    this.uri = '';
   }
 
   /**

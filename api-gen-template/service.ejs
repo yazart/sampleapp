@@ -41,7 +41,7 @@ export class <%=`${fnPascalCase(service.name)}`%>ApiService <%_ if(genSrvInterfa
   constructor(
     public http: HttpClient) {
     this.serviceName = '<%=`${fnPascalCase(service.name)}`%>Api';
-    this.uri = '<%-service.uri%>';
+    this.uri = '<%-service.uri === '/'? '': service.uri%>';
   }
 
 <%_ for(const method of service.methods) {-%>

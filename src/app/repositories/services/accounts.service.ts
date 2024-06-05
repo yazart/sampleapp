@@ -13,7 +13,7 @@ export class AccountsApiService {
   public uri: string;
   constructor(public http: HttpClient) {
     this.serviceName = 'AccountsApi';
-    this.uri = '/';
+    this.uri = '';
   }
 
   /**

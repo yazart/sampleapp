@@ -21,8 +21,11 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],"paths": {
+      "@api": ["./src/app/repositories"]
+    }
   },
+
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
