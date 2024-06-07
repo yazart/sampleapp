@@ -1,3 +1,4 @@
+export * from './enums'
 export { AccountModel } from './account-model.model';
 export { AccountUpdateModel } from './account-update-model.model';
 export { CardActivateModel } from './card-activate-model.model';
@@ -6,7 +7,6 @@ export { CardOrderModel } from './card-order-model.model';
 export { ClientModel } from './client-model.model';
 export { ClientUpdatePasswordModel } from './client-update-password-model.model';
 export { CreateClientModel } from './create-client-model.model';
-export * from './enums';
 export { GetTokenModel } from './get-token-model.model';
 export { OperationInfo } from './operation-info.model';
 export { PostedParam } from './posted-param.model';

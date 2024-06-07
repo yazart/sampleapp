@@ -19,6 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+
             "outputPath": "dist/sampleapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -77,7 +78,8 @@
               "buildTarget": "sampleapp:build:production"
             },
             "development": {
-              "buildTarget": "sampleapp:build:development"
+              "buildTarget": "sampleapp:build:development",
+              "proxyConfig": "./proxy.config.js"
             }
           },
           "defaultConfiguration": "development"

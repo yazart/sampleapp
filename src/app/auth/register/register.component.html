@@ -1,1 +1,179 @@
-<p>register works!</p>
+<div class="tui-container_adaptive tui-container_fullwidth tui-space_top-16">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-3 tui-col_lg-4 tui-col_xs-1"></div>
+    <div class="tui-col_md-6 tui-col_lg-4  tui-col_xs-10 ">
+      <tui-island>
+        <p class="tui-island__category">itester</p>
+        <h3 class="tui-island__title">Регистрация</h3>
+        <div class="tui-island__paragraph">
+          <form [formGroup]="registerForm" (ngSubmit)="register()" >
+            <tui-input-phone [tuiTextfieldSize]="'m'" formControlName="phoneNumber">
+              Телефон
+              <input
+                autocomplete="tel"
+                tuiTextfield
+              />
+            </tui-input-phone>
+            <tui-input
+              formControlName="login"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              Логин
+              <input
+                autocomplete="login"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-input
+              formControlName="email"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              e-mail
+              <input
+                autocomplete="email"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-input
+              formControlName="lastName"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              Фамилия
+              <input
+                autocomplete="lastname"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-input
+              formControlName="firstName"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              Имя
+              <input
+                autocomplete="firstname"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-input
+              formControlName="middleName"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              Отчество
+              <input
+                autocomplete="patronymic"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-input-date
+              formControlName="birthdate"
+              tuiTextfieldSize="m"
+              class="tui-space_vertical-4"
+              [max]="maxDate"
+              [tuiTextfieldLabelOutside]="true"
+            >
+              Дата рождения
+            </tui-input-date>
+            <div class="tui-form__row_multi-fields sex-align">
+              <span class="tui-form__field-note tui-space_right-16 tui-space_left-4">
+                Пол
+              </span>
+              <div class="tui-form__multi-field tui-space_left-4">
+                <div
+                  tuiGroup
+                  class="group"
+                  [collapsed]="true"
+                >
+                  <tui-radio-labeled
+                    formControlName="sex"
+                    [item]="sexType.Male"
+                    size="m"
+                  >
+                    Мужской
+                  </tui-radio-labeled>
+                  <tui-radio-labeled
+                    formControlName="sex"
+                    [item]="sexType.Female"
+                    size="m"
+                  >
+                    Женский
+                  </tui-radio-labeled>
+                </div>
+              </div>
+            </div>
+
+
+
+            <tui-input-password
+              formControlName="password"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              [minlength]="8"
+              class="tui-space_top-4"
+            >
+              Придумайте пароль
+              <input
+                autocomplete="password"
+                tuiTextfield
+                type="password"
+              />
+            </tui-input-password>
+            <tui-input-password
+              formControlName="password2"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              [minlength]="8"
+              class="tui-space_top-4"
+            >
+              Повторите пароль
+              <input
+                autocomplete="password"
+                tuiTextfield
+                type="password"
+              />
+            </tui-input-password>
+            <div class="actions tui-space_top-8">
+              <div class=" tui-row tui-row_align_center">
+                <div class="tui-col_12 tui-col_xs-12">
+                  <button
+                    tuiButton
+                    type="submit"
+                    size="m"
+                    class="tui-col_12"
+                    [disabled]="!(registerFormValid$|async)"
+                  >
+                    Зарегистрироваться
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <button
+            appearance="flat"
+            size="m"
+            tuiButton
+            type="button"
+            class="tui-island__footer-button"
+            [routerLink]="['/auth/login']"
+          >
+            Войти
+          </button>
+        </div>
+      </tui-island>
+    </div>
+  </div>
+</div>

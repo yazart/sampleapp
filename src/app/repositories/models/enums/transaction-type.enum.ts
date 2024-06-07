@@ -1,6 +1,7 @@
 // Automatically generated - do not modify!
+/* eslint no-restricted-syntax: 0 */
 
-export const TransactionType = {
-  Income = 'Income',
-  Expense = 'Expense',
-} as const;
+export enum TransactionType {
+	Income="Income",
+	Expense="Expense"
+}

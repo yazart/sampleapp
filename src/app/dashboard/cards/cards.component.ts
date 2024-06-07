@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cards',
   standalone: true,
+  selector: 'app-cards',
   imports: [],
   templateUrl: './cards.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './cards.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardsComponent {
-
-}
+export class CardsComponent {}

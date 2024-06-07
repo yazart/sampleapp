@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-recovery',
   standalone: true,
+  selector: 'app-recovery',
   imports: [],
   templateUrl: './recovery.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './recovery.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecoveryComponent {
-
-}
+export class RecoveryComponent {}

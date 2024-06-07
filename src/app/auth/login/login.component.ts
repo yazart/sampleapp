@@ -1,14 +1,23 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {TuiInputModule, TuiIslandModule} from "@taiga-ui/kit";
-import {TuiButtonModule, TuiLinkModule, TuiSvgModule, TuiTextfieldControllerModule} from "@taiga-ui/core";
-import {map, startWith} from "rxjs";
-import {AsyncPipe} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import {
+  TuiButtonModule,
+  TuiLinkModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
+import {
+  TuiInputModule,
+  TuiInputPasswordModule,
+  TuiIslandModule,
+} from '@taiga-ui/kit';
+import { map, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
+  selector: 'app-login',
   imports: [
     ReactiveFormsModule,
     TuiInputModule,
@@ -18,22 +27,26 @@ import {RouterLink} from "@angular/router";
     TuiIslandModule,
     TuiLinkModule,
     RouterLink,
-    TuiSvgModule
+    TuiSvgModule,
+    TuiInputPasswordModule,
   ],
   templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  readonly loginForm =  this.fb.group({
+  protected readonly loginForm = this.fb.group({
     login: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
   });
 
-  readonly loginFormInvalid$ = this.loginForm.statusChanges.pipe(startWith(this.loginForm.status), map((e)=> {return e !== 'VALID';}))
+  protected readonly loginFormValid$ = this.loginForm.statusChanges.pipe(
+    startWith(this.loginForm.status),
+    map((e) => e === 'VALID'),
+  );
 
   constructor(private readonly fb: FormBuilder) {}
 
-  login():void {
+  protected login(): void {
     console.log(this.loginForm.value);
   }
 }

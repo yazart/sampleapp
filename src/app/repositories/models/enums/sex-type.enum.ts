@@ -1,7 +1,8 @@
 // Automatically generated - do not modify!
+/* eslint no-restricted-syntax: 0 */
 
-export const SexType = {
-  Unknown = 'Unknown',
-  Male = 'Male',
-  Female = 'Female',
-} as const;
+export enum SexType {
+	Unknown="Unknown",
+	Male="Male",
+	Female="Female"
+}

@@ -1,8 +1,9 @@
 // Automatically generated - do not modify!
+/* eslint no-restricted-syntax: 0 */
 
-export const OperationCode = {
-  AccountOpen = 'AccountOpen',
-  AccountRefill = 'AccountRefill',
-  AccountTransfer = 'AccountTransfer',
-  CardOrder = 'CardOrder',
-} as const;
+export enum OperationCode {
+	AccountOpen="AccountOpen",
+	AccountRefill="AccountRefill",
+	AccountTransfer="AccountTransfer",
+	CardOrder="CardOrder"
+}

@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-profile',
   standalone: true,
+  selector: 'app-profile',
   imports: [],
   templateUrl: './profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './profile.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent {
-
-}
+export class ProfileComponent {}

@@ -1,6 +1,7 @@
 // Automatically generated - do not modify!
+/* eslint no-restricted-syntax: 0 */
 
-export const <%=`${value.name}`%> = {
+export enum <%=`${value.name}`%> {
 <%const params = value.value.map(x=> `${x.key}=${parseInt(x.val.toString(), 10).toString() !== 'NaN'? x.val: '"' + x.val + '"'}`)-%>
 <%-`\t${params.join(',\r\n\t')}`%>
-} as const;
+}

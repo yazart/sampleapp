@@ -1,7 +1,8 @@
 // Automatically generated - do not modify!
+/* eslint no-restricted-syntax: 0 */
 
-export const TransactionState = {
-  Hold = 'Hold',
-  Completed = 'Completed',
-  Canceled = 'Canceled',
-} as const;
+export enum TransactionState {
+	Hold="Hold",
+	Completed="Completed",
+	Canceled="Canceled"
+}
