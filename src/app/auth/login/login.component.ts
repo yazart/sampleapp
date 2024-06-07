@@ -1,19 +1,23 @@
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe, JsonPipe} from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
-  TuiButtonModule,
+  TuiButtonModule, TuiErrorModule,
   TuiLinkModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
+  TuiFieldErrorPipeModule,
   TuiInputModule,
   TuiInputPasswordModule,
   TuiIslandModule,
 } from '@taiga-ui/kit';
 import { map, startWith } from 'rxjs';
+import {AuthorizationApiService} from "@api";
+import {AuthService} from "../auth.service";
+import {LogoComponent} from "../../logo.component";
 
 @Component({
   standalone: true,
@@ -29,6 +33,10 @@ import { map, startWith } from 'rxjs';
     RouterLink,
     TuiSvgModule,
     TuiInputPasswordModule,
+    JsonPipe,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    LogoComponent,
   ],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,9 +52,25 @@ export class LoginComponent {
     map((e) => e === 'VALID'),
   );
 
-  constructor(private readonly fb: FormBuilder) {}
+  protected readonly loginData$ = this.auth.tokenModel$;
+
+  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService) {}
 
   protected login(): void {
-    console.log(this.loginForm.value);
+    this.loginForm.updateValueAndValidity({emitEvent: true});
+    if(this.loginForm.valid){
+      const {login, password} = this.loginForm.getRawValue();
+      if(login && password){
+        this.auth.login(
+          login,
+          password
+        ).subscribe((success )=>{
+          console.log(success);
+        });
+      }else {
+        //alarm
+      }
+
+    }
   }
 }

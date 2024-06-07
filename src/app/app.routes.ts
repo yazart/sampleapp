@@ -1,6 +1,8 @@
 import type { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+  {path: 'welcome', loadComponent: ()=> import('./welcome/welcome.component').then(c=>c.WelcomeComponent)},
   {
     path: 'auth',
     loadChildren: async () =>

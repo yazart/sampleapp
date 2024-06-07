@@ -1,0 +1,30 @@
+<tui-block-status >
+  <img
+    alt="survived"
+    tuiSlot="top"
+    [ngSrc]="(img$ | async ) || ''"
+    />
+
+  <h4>Добро пожаловать на платформу <logo></logo></h4>
+
+  <span class="text">
+        You can do something with it, or you can not do it. And the description text can be quite long.
+    </span>
+
+  <button
+    appearance="secondary"
+    tuiButton
+    [size]="'m'"
+    [routerLink]="['/auth/login']"
+  >
+    Войти
+  </button>
+  <button
+    appearance="mono"
+    tuiButton
+    [size]="'m'"
+    [routerLink]="['/auth/register']"
+  >
+    Зарегистрироваться
+  </button>
+</tui-block-status>

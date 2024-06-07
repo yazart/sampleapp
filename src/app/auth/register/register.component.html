@@ -3,7 +3,7 @@
     <div class="tui-col_md-3 tui-col_lg-4 tui-col_xs-1"></div>
     <div class="tui-col_md-6 tui-col_lg-4  tui-col_xs-10 ">
       <tui-island>
-        <p class="tui-island__category">itester</p>
+        <p class="tui-island__category"><logo/></p>
         <h3 class="tui-island__title">Регистрация</h3>
         <div class="tui-island__paragraph">
           <form [formGroup]="registerForm" (ngSubmit)="register()" >
@@ -14,6 +14,10 @@
                 tuiTextfield
               />
             </tui-input-phone>
+            <tui-error
+              formControlName="phoneNumber"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input
               formControlName="login"
               tuiTextfieldSize="m"
@@ -27,6 +31,10 @@
                 type="text"
               />
             </tui-input>
+            <tui-error
+              formControlName="login"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input
               formControlName="email"
               tuiTextfieldSize="m"
@@ -40,6 +48,10 @@
                 type="text"
               />
             </tui-input>
+            <tui-error
+              formControlName="email"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input
               formControlName="lastName"
               tuiTextfieldSize="m"
@@ -53,6 +65,10 @@
                 type="text"
               />
             </tui-input>
+            <tui-error
+              formControlName="lastName"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input
               formControlName="firstName"
               tuiTextfieldSize="m"
@@ -66,6 +82,10 @@
                 type="text"
               />
             </tui-input>
+            <tui-error
+              formControlName="firstName"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input
               formControlName="middleName"
               tuiTextfieldSize="m"
@@ -74,20 +94,29 @@
             >
               Отчество
               <input
-                autocomplete="patronymic"
+                autocomplete="middleName"
                 tuiTextfield
                 type="text"
               />
             </tui-input>
+            <tui-error
+              formControlName="middleName"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input-date
               formControlName="birthdate"
               tuiTextfieldSize="m"
               class="tui-space_vertical-4"
               [max]="maxDate"
+              [min]="minDate"
               [tuiTextfieldLabelOutside]="true"
             >
               Дата рождения
             </tui-input-date>
+            <tui-error
+              formControlName="birthdate"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <div class="tui-form__row_multi-fields sex-align">
               <span class="tui-form__field-note tui-space_right-16 tui-space_left-4">
                 Пол
@@ -115,14 +144,32 @@
                 </div>
               </div>
             </div>
-
-
+            <tui-error
+              formControlName="sex"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+            <tui-input
+              formControlName="address"
+              tuiTextfieldSize="m"
+              [tuiTextfieldCleaner]="true"
+              class="tui-space_top-4"
+            >
+              Адресс
+              <input
+                autocomplete="address"
+                tuiTextfield
+                type="text"
+              />
+            </tui-input>
+            <tui-error
+              formControlName="address"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
 
             <tui-input-password
               formControlName="password"
               tuiTextfieldSize="m"
               [tuiTextfieldCleaner]="true"
-              [minlength]="8"
               class="tui-space_top-4"
             >
               Придумайте пароль
@@ -132,11 +179,14 @@
                 type="password"
               />
             </tui-input-password>
+            <tui-error
+              formControlName="password"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <tui-input-password
               formControlName="password2"
               tuiTextfieldSize="m"
               [tuiTextfieldCleaner]="true"
-              [minlength]="8"
               class="tui-space_top-4"
             >
               Повторите пароль
@@ -146,6 +196,10 @@
                 type="password"
               />
             </tui-input-password>
+            <tui-error
+              formControlName="password2"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
             <div class="actions tui-space_top-8">
               <div class=" tui-row tui-row_align_center">
                 <div class="tui-col_12 tui-col_xs-12">

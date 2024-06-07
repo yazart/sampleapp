@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   standalone: true,
@@ -6,6 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [],
   templateUrl: './recovery.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrl: './recovery.component.scss',
 })
-export class RecoveryComponent {}
+export class RecoveryComponent {
+  protected readonly phone = new FormControl<string>('', Validators.required)
+
+
+}
