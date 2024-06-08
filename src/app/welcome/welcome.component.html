@@ -2,29 +2,49 @@
   <img
     alt="survived"
     tuiSlot="top"
-    [ngSrc]="(img$ | async ) || ''"
-    />
+    [src]="(img$ | async ) || 'data:image/webp;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='"
+    [width]="'200px;'"
+    [height]="'200px;'"
+  />
 
   <h4>Добро пожаловать на платформу <logo></logo></h4>
+  <ng-container *tuiLet="isAuthorized$ | async as isAuthorized">
 
-  <span class="text">
-        You can do something with it, or you can not do it. And the description text can be quite long.
+    <span class="text">
+        Вы можете начать пользоваться платформой прямо сейчас!
+      {{isAuthorized? ' Для этого перейдите на главную страницу': ''}}
     </span>
+    <p>
+    @if (!isAuthorized){
+      <button
+        appearance="accent"
+        tuiButton
+        [size]="'m'"
+        [routerLink]="['/auth/login']"
+      >
+        Войти
+      </button>
+      <br/>
+      <button
+        appearance="secondary"
+        tuiButton
+        [size]="'m'"
+        [routerLink]="['/auth/register']"
+      >
+        Зарегистрироваться
+      </button>
+    } @else {
+      <button
+        appearance="secondary"
+        tuiButton
+        [size]="'m'"
+        [routerLink]="['/dashboard']"
+      >
+        Главная страница
+      </button>
+    }
 
-  <button
-    appearance="secondary"
-    tuiButton
-    [size]="'m'"
-    [routerLink]="['/auth/login']"
-  >
-    Войти
-  </button>
-  <button
-    appearance="mono"
-    tuiButton
-    [size]="'m'"
-    [routerLink]="['/auth/register']"
-  >
-    Зарегистрироваться
-  </button>
+
+  </ng-container>
+
 </tui-block-status>

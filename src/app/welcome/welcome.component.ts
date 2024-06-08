@@ -7,6 +7,9 @@ import {RouterLink} from "@angular/router";
 import {BehaviorSubject, Observable} from "rxjs";
 import {resolve} from "@angular/compiler-cli";
 import {DomSanitizer} from "@angular/platform-browser";
+import {AuthService} from "../auth/auth.service";
+import {map} from "rxjs/operators";
+import {TuiLetModule} from "@taiga-ui/cdk";
 
 @Component({
   selector: 'app-welcome',
@@ -18,7 +21,8 @@ import {DomSanitizer} from "@angular/platform-browser";
     LogoComponent,
     RouterLink,
     AsyncPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    TuiLetModule
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss',
@@ -26,6 +30,12 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class WelcomeComponent implements OnInit{
   img$ = new BehaviorSubject('');
+  isAuthorized$ = this.auth.token$.pipe(
+    map((token): boolean=> !!token)
+  )
+
+  constructor(private readonly auth: AuthService) {
+  }
 
   ngOnInit():void {
     import('./img').then((e)=>e.imgBuildings).then((d)=>this.img$.next(d))
