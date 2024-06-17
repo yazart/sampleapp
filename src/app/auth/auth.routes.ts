@@ -6,6 +6,7 @@ export const AUTH_ROUTES: Routes = [
     loadComponent: async () =>
       import('./auth.component').then((c) => c.AuthComponent),
     children: [
+      { path: '', pathMatch: 'full', redirectTo: 'login'},
       {
         path: 'login',
         loadComponent: async () =>

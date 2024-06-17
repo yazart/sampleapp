@@ -81,6 +81,7 @@ export class AppComponent {
   );
 
   protected logout(): void {
+    this.open = false;
     this.auth.logout();
     this.router.navigate(['/']).then();
   }

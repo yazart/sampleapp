@@ -1,4 +1,6 @@
 import type { Routes } from '@angular/router';
+import {authGuard} from "./auth/auth.guard.fn";
+import {noAuthGuard} from "./auth/no-auth.guard.fn";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -9,11 +11,13 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
+    canActivate: [noAuthGuard],
     loadChildren: async () =>
       import('./auth/auth.routes').then((r) => r.AUTH_ROUTES),
   },
   {
     path: 'dashboard',
+    canActivate: [authGuard],
     loadComponent: async () =>
       import('./dashboard/dashboard.component').then(
         (c) => c.DashboardComponent,
