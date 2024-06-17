@@ -2,7 +2,7 @@
 /* eslint no-restricted-syntax: 0 */
 
 export enum TransactionState {
-	Hold="Hold",
-	Completed="Completed",
-	Canceled="Canceled"
+  Hold = 'Hold',
+  Completed = 'Completed',
+  Canceled = 'Canceled',
 }

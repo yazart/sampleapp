@@ -7,7 +7,7 @@ import { <%=service.imports.join(', ');-%> } from '../models';
 <%if(hasParamString){-%>
 import { createParamString } from '../internals';
 <%_}-%>
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 <%_ if(genSrvInterface){%>
@@ -36,14 +36,9 @@ export interface I<%=`${fnPascalCase(service.name)}`%>ApiService {
 
 @Injectable(<%-`${providedIn=== 'none'? '': '{providedIn:'}${providedIn!=='none'?'\''+providedIn+'\'}': ''} `%> )
 export class <%=`${fnPascalCase(service.name)}`%>ApiService <%_ if(genSrvInterface){%> implements I<%=`${fnPascalCase(service.name)}`%>ApiService <% } -%> {
-  public serviceName: string;
-  public uri: string;
-  constructor(
-    public http: HttpClient) {
-    this.serviceName = '<%=`${fnPascalCase(service.name)}`%>Api';
-    this.uri = '<%-service.uri === '/'? '': service.uri%>';
-  }
-
+  public serviceName = '<%=`${fnPascalCase(service.name)}`%>Api';
+  public uri= '<%-service.uri === '/'? '': service.uri%>';
+  public http = inject(HttpClient);
 <%_ for(const method of service.methods) {-%>
   <%_ const temp = []-%>
     <%_ temp.push(...['\r\n\t/**','\t* @method',`\t* @name  ${method.name}`,`\t* @description ${method.description ? method.description.replace('\r\n', '') : ''}`])-%>
@@ -79,7 +74,7 @@ export class <%=`${fnPascalCase(service.name)}`%>ApiService <%_ if(genSrvInterfa
   );
     options.params = new HttpParams({fromString: paramString});
   <%}-%>
-  <%if((method.type === 'post') || (method.type === 'put')){-%>
+  <%if((method.type === 'post') || (method.type === 'put') || (method.type === 'patch')){-%>
     <%if(method.params.formData.length !== 0) {-%>
       options.headers = new HttpHeaders( customHeaders );
       options.headers.delete('Content-Type');
@@ -117,7 +112,7 @@ options.headers = new HttpHeaders(Object.assign({'Content-Type': 'application/js
 <%-`payload = ${method.params.body[0].name};\r\n`-%>
         <%}-%>
       <%}-%>
-<%-`return this.http.${method.type}<${method.resp[0]?.type}>(this.uri + \`${method.uri}\`, JSON.stringify(payload), options);`-%>
+<%-`return this.http.${method.type}<${method.resp[0]?.type}>(this.uri + \`${method.uri}\`, /*\`${method.type}\` */ ${method.type === 'patch'? "payload" : "JSON.stringify(payload)" }, options);`-%>
     <%}%>
     <%}-%>
   <%}-%>

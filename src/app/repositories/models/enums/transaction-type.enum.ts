@@ -2,6 +2,6 @@
 /* eslint no-restricted-syntax: 0 */
 
 export enum TransactionType {
-	Income="Income",
-	Expense="Expense"
+  Income = 'Income',
+  Expense = 'Expense',
 }

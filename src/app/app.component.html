@@ -1,14 +1,13 @@
 <tui-root>
     <div tuiHeader>
-      <div tuiTitle>
-       <logo />
-        <div tuiSubtitle>
+      <div tuiTitle class="tui-space_left-8">
+       <logo class="tui-space_left-4"/>
+        <div tuiSubtitle class="tui-space_left-4">
           Platform
         </div>
       </div>
 
       <div tuiAccessories>
-
         @if (userName$ | async){
           <tui-hosted-dropdown
             #host
@@ -17,21 +16,11 @@
             [sided]="true"
             [(open)]="open"
           >
-<!--            <button-->
-<!--              appearance="flat"-->
-<!--              iconRight="tuiIconChevronRight"-->
-<!--              size="m"-->
-<!--              tuiButton-->
-<!--              type="button"-->
-<!--              [pseudoActive]="open || null"-->
-<!--            >-->
-<!--              Button-->
-<!--            </button>-->
             <tui-avatar
               size="m"
               [text]="(userName$ | async) || ''"
               class="tui-space_vertical-1 tui-space_horizontal-4"
-            ></tui-avatar>
+            />
           </tui-hosted-dropdown>
           <ng-template
             #dropdown
@@ -47,7 +36,7 @@
                   >
                     <tui-icon [icon]="item.icon"
                     class="tui-space_right-2"
-                    ></tui-icon>
+                    />
                     {{ item.name }}
                   </button>
                 }

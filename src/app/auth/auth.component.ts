@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {TUI_VALIDATION_ERRORS} from "@taiga-ui/kit";
-import {of} from "rxjs";
+import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 
 @Component({
   standalone: true,
@@ -16,10 +15,10 @@ import {of} from "rxjs";
       useValue: {
         required: 'Поле не заполнено',
         email: 'Введите корректный адрес электронной почты',
-        minlength: ({requiredLength}: {requiredLength: string}) =>
-          (`Минимальная длинна — ${requiredLength}`),
+        minlength: ({ requiredLength }: { requiredLength: string }) =>
+          `Минимальная длинна — ${requiredLength}`,
       },
     },
-  ]
+  ],
 })
 export class AuthComponent {}

@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@jest/globals": "^29.7.0",
     "@ng-web-apis/common": "^3.0.6",
     "@ng-web-apis/storage": "^3.0.6",
     "@taiga-ui/addon-charts": "^3.82.0",
@@ -44,7 +45,7 @@
     "jwt-decode": "^4.0.0",
     "luxon": "^3.4.4",
     "rxjs": "~7.8.0",
-    "sw2ngx": "^6.8.1",
+    "sw2ngx": "^6.9.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

@@ -1,9 +1,11 @@
-import {AsyncPipe, JsonPipe} from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {Router, RouterLink} from '@angular/router';
 import {
-  TuiButtonModule, TuiErrorModule,
+  TuiAlertService,
+  TuiButtonModule,
+  TuiErrorModule,
   TuiLinkModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
@@ -15,9 +17,9 @@ import {
   TuiIslandModule,
 } from '@taiga-ui/kit';
 import { map, startWith } from 'rxjs';
-import {AuthorizationApiService} from "@api";
-import {AuthService} from "../auth.service";
-import {LogoComponent} from "../../logo.component";
+
+import { LogoComponent } from '../../logo.component';
+import { AuthService } from '../auth.service';
 
 @Component({
   standalone: true,
@@ -42,6 +44,10 @@ import {LogoComponent} from "../../logo.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly auth = inject(AuthService);
+  private readonly alerts = inject(TuiAlertService);
+  private readonly router = inject(Router);
   protected readonly loginForm = this.fb.group({
     login: ['', Validators.required],
     password: ['', Validators.required],
@@ -52,25 +58,29 @@ export class LoginComponent {
     map((e) => e === 'VALID'),
   );
 
-  protected readonly loginData$ = this.auth.tokenModel$;
-
-  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService) {}
+  protected readonly loginData$ = this.auth.pTokenModel$;
 
   protected login(): void {
-    this.loginForm.updateValueAndValidity({emitEvent: true});
-    if(this.loginForm.valid){
-      const {login, password} = this.loginForm.getRawValue();
-      if(login && password){
-        this.auth.login(
-          login,
-          password
-        ).subscribe((success )=>{
-          console.log(success);
-        });
-      }else {
-        //alarm
-      }
+    this.loginForm.updateValueAndValidity({ emitEvent: true });
 
+    if (this.loginForm.valid) {
+      const { login, password } = this.loginForm.getRawValue();
+
+      if (login && password) {
+        this.auth.login(login, password).subscribe((e) => {
+          if(!e){
+            this.alerts.open(`Логин или пароль введены неверно, либо пользователя не существует`, {status: 'error'}).subscribe()
+            return;
+          }
+            this.alerts.open(`Вы успешно авторизовались`, {status: 'success'}).subscribe()
+            this.router.navigate(['/', 'dashboard']).then();
+
+
+
+        });
+      } else {
+        this.alerts.open(`Введены не все параметры для авторизации`, {status: 'error'}).subscribe()
+      }
     }
   }
 }

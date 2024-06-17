@@ -2,8 +2,8 @@
 /* eslint no-restricted-syntax: 0 */
 
 export enum OperationCode {
-	AccountOpen="AccountOpen",
-	AccountRefill="AccountRefill",
-	AccountTransfer="AccountTransfer",
-	CardOrder="CardOrder"
+  AccountOpen = 'AccountOpen',
+  AccountRefill = 'AccountRefill',
+  AccountTransfer = 'AccountTransfer',
+  CardOrder = 'CardOrder',
 }

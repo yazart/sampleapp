@@ -1,7 +1,7 @@
 // Automatically generated - do not modify!
 
-import { OperationCode } from './';
+import type { OperationCode } from '.';
 
 export interface StartOperationModel {
-	readonly operationCode: OperationCode;
+  readonly operationCode: OperationCode;
 }
