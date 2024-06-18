@@ -29,6 +29,7 @@
     "@ng-web-apis/storage": "^3.0.6",
     "@taiga-ui/addon-charts": "^3.82.0",
     "@taiga-ui/addon-commerce": "^3.82.0",
+    "@taiga-ui/addon-mobile": "^3.83.0",
     "@taiga-ui/addon-preview": "^3.82.0",
     "@taiga-ui/addon-table": "^3.82.0",
     "@taiga-ui/addon-tablebars": "^3.82.0",

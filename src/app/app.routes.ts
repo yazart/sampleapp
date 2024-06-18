@@ -25,11 +25,13 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
+    canActivate: [authGuard],
     loadComponent: async () =>
       import('./profile/profile.component').then((c) => c.ProfileComponent),
   },
   {
     path: 'history',
+    canActivate: [authGuard],
     loadComponent: async () =>
       import('./history/history.component').then((c) => c.HistoryComponent),
   },

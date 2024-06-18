@@ -1,1 +1,38 @@
-<p>history works!</p>
+<app-navigation>
+  <section class="tui-space_top-4">
+    @for (transaction of (transactions$ | async); track transaction.id) {
+      <div tuiCell >
+        <tui-avatar
+          [src]="transaction.state === state.Hold? 'tuiIconClock':transaction.state === state.Canceled? 'tuiIconAlertCircle':'tuiIconCheckCircle'"
+          [appearance]="transaction.state === state.Hold? 'neutral':transaction.state === state.Canceled? 'error':'success'"
+          tuiAccessories
+        ></tui-avatar>
+        <div tuiTitle>
+          <strong>{{transaction.receiver}}</strong>
+          <div tuiSubtitle>{{ (transaction.paymentDate? transaction.paymentDate : transaction.date ) | date: "dd.MM.YYYY" }}</div>
+          <tui-badge appearance="neutral">{{transaction.comment}}</tui-badge>
+        </div>
+        <div
+          tuiAccessories
+          tuiTitle
+          [style.white-space]="'nowrap'"
+          [style.width]="0"
+        >
+          <tui-money
+            [style.color]="transaction.type === ttype.Income?'var(--tui-positive)':'var(--tui-negative)'"
+            [currency]="'RUB'"
+            [value]="(transaction.type === ttype.Expense? -(transaction.amount||0):( transaction.amount||0))"
+          >
+
+          </tui-money>
+        </div>
+      </div>
+    }
+  </section>
+
+
+</app-navigation>
+
+
+
+

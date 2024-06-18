@@ -1,0 +1,31 @@
+:host{
+  height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  & section {
+    flex-grow: 1;
+    max-height: calc(100vh - 176px);
+    overflow: scroll;
+    padding-bottom: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.app-nav{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+.app-bar{
+  display: none;
+}
+@media screen and (max-device-width: 799px) {
+  .app-bar{
+    display: flex;
+  }
+  .app-nav {
+    display: none;
+  }
+}

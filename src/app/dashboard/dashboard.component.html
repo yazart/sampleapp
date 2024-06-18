@@ -1,1 +1,131 @@
-<p>dashboard works!</p>
+<app-navigation>
+  <div
+    class="tui-space_top-8"
+    tuiCardLarge
+    tuiSurface="elevated"
+  >
+    <header tuiHeader>
+      <h1 tuiTitle>
+        Карты
+      </h1>
+    </header>
+
+    <section>
+
+      <label
+        tuiCardMedium
+        tuiSurface
+        class="card"
+      >
+        <div tuiCell="l">
+          <div tuiTitle class="no-wrap" tuiFade>
+            <tui-money
+              [currency]="'RUB'"
+              [value]="10728.9"
+            ></tui-money>
+            <div tuiSubtitle>Название карты</div>
+          </div>
+        </div>
+        <div
+          tuiFade
+          class="cards"
+        >
+          <tui-thumbnail-card
+            size="m"
+            [style.background-color]="'var(--tui-primary)'"
+          >
+            ** 2222
+          </tui-thumbnail-card>
+        </div>
+      </label>
+      <label
+        tuiCardMedium
+        tuiSurface="flat"
+        class="card"
+      >
+        <tui-icon
+          icon="tuiIconPlusSquareLarge"
+          class="plus"
+        ></tui-icon>
+
+        <h2 tuiTitle>
+          Новая
+          <span tuiSubtitle>карта</span>
+        </h2>
+      </label>
+    </section>
+
+    <footer>
+      <button
+        tuiLink
+        type="button"
+      >
+        Заказать карту
+      </button>
+    </footer>
+  </div>
+  <div
+    class="tui-space_top-8"
+    tuiCardLarge
+    tuiSurface="elevated"
+  >
+    <header tuiHeader>
+      <h1 tuiTitle>
+        Счета
+      </h1>
+    </header>
+
+    <section>
+      <label
+        tuiCardMedium
+        tuiSurface="flat"
+        class="card"
+      >
+        <div tuiCell="l">
+          <div tuiTitle class="no-wrap" tuiFade>
+            <tui-money
+              [currency]="'RUB'"
+              [value]="10728.9"
+            ></tui-money>
+            <div tuiSubtitle>Название счета</div>
+          </div>
+        </div>
+        <div
+          tuiFade
+          class="cards"
+        >
+          <tui-thumbnail-card
+            size="m"
+            [style.background-color]="'var(--tui-accent)'"
+          >
+            счёт
+          </tui-thumbnail-card>
+        </div>
+      </label>
+      <label
+        tuiCardMedium
+        tuiSurface="flat"
+        class="card"
+      >
+        <tui-icon
+          icon="tuiIconPlusSquareLarge"
+          class="plus"
+        ></tui-icon>
+
+        <h2 tuiTitle>
+          Новый
+          <span tuiSubtitle>счет</span>
+        </h2>
+      </label>
+    </section>
+
+    <footer>
+      <button
+        tuiLink
+        type="button"
+      >
+        Открыть счет
+      </button>
+    </footer>
+  </div>
+</app-navigation>

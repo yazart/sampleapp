@@ -9,9 +9,9 @@ export interface TransactionModel {
   /* Получатель */
   readonly receiver?: string;
   /* Дата */
-  readonly date?: string;
+  readonly date: Date;
   /* Дата выполнения транзакции */
-  readonly paymentDate?: string;
+  readonly paymentDate: Date;
   /* Сумма */
   readonly amount?: number;
   /* Комментарий */

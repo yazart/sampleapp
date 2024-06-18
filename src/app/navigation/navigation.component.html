@@ -1,0 +1,62 @@
+<nav class="app-nav tui-space_top-4">
+  <tui-segmented>
+    <button
+      [routerLink]="['/dashboard']"
+      routerLinkActive
+    >
+      <tui-icon icon="tuiIconHome"></tui-icon>
+      Мой банк
+    </button>
+
+    <button
+      [routerLink]="['/history']"
+      routerLinkActive
+    >
+      <tui-icon icon="tuiIconList"></tui-icon>
+      История
+    </button>
+
+    <button
+
+      [routerLink]="['/profile']"
+      routerLinkActive>
+      <tui-icon icon="tuiIconUser"></tui-icon>
+      Личный кабинет
+    </button>
+  </tui-segmented>
+</nav>
+<section>
+  <ng-content></ng-content>
+</section>
+<nav
+  tuiTabBar
+  class="app-bar"
+  ngProjectAs="tuiOverContent"
+>
+  <a
+    tuiTabBarItem
+    [routerLink]="['/dashboard']"
+    routerLinkActive
+    icon="tuiIconHome"
+  >
+    Мой банк
+  </a>
+
+  <a
+    tuiTabBarItem
+    [routerLink]="['/history']"
+    routerLinkActive
+    icon="tuiIconList"
+  >
+    История
+  </a>
+
+  <a
+    tuiTabBarItem
+    [routerLink]="['/profile']"
+    routerLinkActive
+    icon="tuiIconUser"
+  >
+    Личный кабинет
+  </a>
+</nav>
