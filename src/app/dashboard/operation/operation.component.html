@@ -1,0 +1,28 @@
+<h2 tuiTitle="m">{{title$ | async }}</h2>
+
+  <formly-form [form]="form" [fields]="(formlyFieldConfig$|async) || []">
+
+  </formly-form>
+<div class="tui-form__buttons">
+  <button
+    size="l"
+    tuiButton
+    type="submit"
+    class="tui-form__button"
+    [showLoader]="$any(loading$ | async)"
+    [disabled]="$any(formValid$ | async)"
+    (click)="next()"
+  >
+    Далее
+  </button>
+  <button
+    size="l"
+    tuiButton
+    type="submit"
+    class="tui-form__button"
+    [showLoader]="$any(loading$ | async)"
+    (click)="confirm()"
+  >
+    Подтвердить
+  </button>
+</div>

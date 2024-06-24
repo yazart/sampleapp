@@ -1,0 +1,9 @@
+@for (productItem of products$| async; track productItem.id){
+  <div tuiCell>
+    <div tuiTitle>
+      {{productItem.name}}
+      <div tuiSubtitle>{{productItem.shortDescription}}</div>
+    </div>
+    <button tuiButton (click)="open(productItem.id)">{{product === 'card'? 'Заказать': 'Открыть'}}</button>
+  </div>
+}

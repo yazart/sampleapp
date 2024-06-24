@@ -1,0 +1,135 @@
+<div
+  class="tui-space_top-8"
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <header tuiHeader>
+    <h1 tuiTitle>
+      Карты
+    </h1>
+  </header>
+
+  <section>
+    @for (card of cards$ | async; track card.id){
+      <label
+        tuiCardMedium
+        tuiSurface
+        class="card"
+      >
+        <div tuiCell="l">
+          <div tuiTitle class="no-wrap" tuiFade>
+            <div tuiSubtitle>{{card.cardProgram}}</div>
+          </div>
+        </div>
+        <div
+          tuiFade
+          class="cards"
+        >
+          <tui-thumbnail-card
+            size="m"
+            [style.background-color]="'var(--tui-primary)'"
+          >
+              ...{{card.number?.toString()?.split("")?.reverse()?.slice(0,4)?.reverse()?.join('')}}
+
+          </tui-thumbnail-card>
+        </div>
+      </label>
+    }
+
+    <label
+      tuiCardMedium
+      tuiSurface="flat"
+      class="card"
+      [routerLink]="['../showcase/card']"
+    >
+      <tui-icon
+        icon="tuiIconPlusSquareLarge"
+        class="plus"
+      ></tui-icon>
+
+      <h2 tuiTitle>
+        Новая
+        <span tuiSubtitle>карта</span>
+      </h2>
+    </label>
+  </section>
+
+  <footer>
+    <button
+      tuiLink
+      type="button"
+      [routerLink]="['../showcase/card']"
+    >
+      Заказать карту
+    </button>
+  </footer>
+</div>
+<div
+  class="tui-space_top-8"
+  tuiCardLarge
+  tuiSurface="elevated"
+>
+  <header tuiHeader>
+    <h1 tuiTitle>
+      Счета
+    </h1>
+  </header>
+
+  <section>
+    @for (account of accounts$ | async; track account.id){
+      <label
+        tuiCardMedium
+        tuiSurface="flat"
+        class="card"
+      >
+        <div tuiCell="l">
+          <div tuiTitle class="no-wrap" tuiFade>
+            <tui-money
+              [currency]="account?.currency?.toString() || 'RUB'"
+              [value]="account?.balance || 0"
+            ></tui-money>
+            <div tuiSubtitle>Название счета{{account?.currency}}</div>
+          </div>
+        </div>
+        <div
+          tuiFade
+          class="cards"
+        >
+          <tui-thumbnail-card
+            size="m"
+            [style.background-color]="'var(--tui-accent)'"
+          >
+            счёт
+          </tui-thumbnail-card>
+        </div>
+      </label>
+    }
+
+    <label
+      tuiCardMedium
+      tuiSurface="flat"
+      class="card"
+      [routerLink]="['../showcase/account']"
+    >
+      <tui-icon
+        icon="tuiIconPlusSquareLarge"
+        class="plus"
+      ></tui-icon>
+
+      <h2 tuiTitle>
+        Новый
+        <span tuiSubtitle>счет</span>
+      </h2>
+    </label>
+  </section>
+
+  <footer>
+    <button
+      tuiLink
+      [routerLink]="['../showcase/account']"
+      type="button"
+    >
+      Открыть счет
+    </button>
+  </footer>
+</div>

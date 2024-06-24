@@ -1,0 +1,18 @@
+section {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0 -1.5rem;
+  padding: 0 1.5rem;
+  overflow: scroll;
+}
+.no-wrap {
+  text-wrap: nowrap;
+}
+.card {
+  cursor: pointer;
+  background-color: var(--tui-neutral-bg);
+  &:hover {
+    background-color: var(--tui-neutral-bg-hover);
+  }
+}
+
