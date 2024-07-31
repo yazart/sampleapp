@@ -33,28 +33,7 @@ export class HistoryComponent {
   transactions$ = this.transactionsQuery.pipe(
     switchMap((query)=>{
       return this.api.getApiTransactions();
-    }),
-    skip(1),
-    startWith([
-      {
-        id: 1,
-        account: 1,
-        /* Получатель */
-        receiver: 'Вкусно и точка',
-        /* Дата */
-        date: new Date(),
-        /* Дата выполнения транзакции */
-        paymentDate: new Date(),
-        /* Сумма */
-        amount: 12345,
-        /* Комментарий */
-        comment: 'перевод',
-        /* Причина */
-        reason: '',
-        state: TransactionState.Hold,
-        type: TransactionType.Expense,
-      }
-    ])
+    })
   )
   protected readonly TransactionType = TransactionType;
 }

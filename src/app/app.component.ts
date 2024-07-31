@@ -25,6 +25,7 @@ import {filter, map, switchMap, tap} from 'rxjs';
 
 import { AuthService } from './auth/auth.service';
 import { LogoComponent } from './logo.component';
+import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
 
 @Component({
   standalone: true,
@@ -49,6 +50,7 @@ import { LogoComponent } from './logo.component';
     TuiDataListModule,
     TuiIconModule,
     RouterLinkActive,
+    TuiSheetDialogModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

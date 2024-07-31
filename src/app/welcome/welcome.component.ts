@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
+import {AsyncPipe, NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -22,6 +22,7 @@ import { LogoComponent } from '../logo.component';
     AsyncPipe,
     NgOptimizedImage,
     TuiLetModule,
+    NgStyle,
   ],
   templateUrl: './welcome.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,9 +31,11 @@ import { LogoComponent } from '../logo.component';
 export class WelcomeComponent implements OnInit {
   protected readonly auth = inject(AuthService);
   protected img$ = new BehaviorSubject('');
+  protected pattern$ = new BehaviorSubject('');
   protected isAuthorized$ = this.auth.isAuthorized$;
 
   public ngOnInit(): void {
     import('./img').then((e) => e.imgBuildings).then((d) => this.img$.next(d));
+    import('./pattern').then((e) => e.patternImg).then((d) => this.pattern$.next(d));
   }
 }

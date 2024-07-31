@@ -5,15 +5,14 @@ import {
     TuiFadeModule,
     TuiHeaderModule,
     TuiIconModule,
-    TuiSurfaceModule, TuiThumbnailCardModule, TuiTitleModule
+    TuiSurfaceModule, TuiTitleModule
 } from "@taiga-ui/experimental";
 import {TuiLinkModule} from "@taiga-ui/core";
-import {TuiMoneyModule} from "@taiga-ui/addon-commerce";
+import {TuiMoneyModule, TuiThumbnailCardModule} from "@taiga-ui/addon-commerce";
 import {RouterLink} from "@angular/router";
 import {AccountsApiService, CardsApiService} from "@api";
 import {AsyncPipe} from "@angular/common";
-import {TuiCurrencyVariants} from "@taiga-ui/addon-commerce/types";
-import {combineLatest, combineLatestAll, map} from "rxjs";
+import {PaymentSystemPipe} from "../payment-system.pipe";
 
 @Component({
   selector: 'app-main',
@@ -30,7 +29,9 @@ import {combineLatest, combineLatestAll, map} from "rxjs";
     TuiThumbnailCardModule,
     TuiTitleModule,
     RouterLink,
-    AsyncPipe
+    AsyncPipe,
+    PaymentSystemPipe,
+    TuiThumbnailCardModule
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',

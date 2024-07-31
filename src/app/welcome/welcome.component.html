@@ -1,50 +1,54 @@
-<tui-block-status >
-  <img
-    alt="survived"
-    tuiSlot="top"
-    [src]="(img$ | async ) || 'data:image/webp;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='"
-    [width]="'200px;'"
-    [height]="'200px;'"
-  />
+<div class="pattern" [style.background-image]="(pattern$ | async) || 'data:image/webp;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='"></div>
+<div class="overlay">
+<tui-block-status>
 
-  <h4>Добро пожаловать на платформу <logo /></h4>
-  <ng-container *tuiLet="isAuthorized$ | async as isAuthorized">
+
+    <img
+      alt="survived"
+      tuiSlot="top"
+      [src]="(img$ | async ) || 'data:image/webp;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='"
+    />
+
+    <h4>Добро пожаловать на платформу <logo /></h4>
+    <ng-container *tuiLet="isAuthorized$ | async as isAuthorized">
 
     <span class="text">
         Вы можете начать пользоваться платформой прямо сейчас!
       {{isAuthorized? ' Для этого перейдите на главную страницу': ''}}
     </span>
-    <p>
-    @if (!isAuthorized){
-      <button
-        appearance="accent"
-        tuiButton
-        [size]="'m'"
-        [routerLink]="['/auth/login']"
-      >
-        Войти
-      </button>
-      <br/>
-      <button
-        appearance="secondary"
-        tuiButton
-        [size]="'m'"
-        [routerLink]="['/auth/register']"
-      >
-        Зарегистрироваться
-      </button>
-    } @else {
-      <button
-        appearance="secondary"
-        tuiButton
-        [size]="'m'"
-        [routerLink]="['/dashboard']"
-      >
-        Главная страница
-      </button>
-    }
-
-
-  </ng-container>
+      <p>
+        @if (!isAuthorized){
+          <button
+            appearance="accent"
+            tuiButton
+            [size]="'m'"
+            [routerLink]="['/auth/login']"
+          >
+            Войти
+          </button>
+          <br/>
+          <button
+            appearance="secondary"
+            tuiButton
+            [size]="'m'"
+            [routerLink]="['/auth/register']"
+          >
+            Зарегистрироваться
+          </button>
+        } @else {
+          <button
+            appearance="secondary"
+            tuiButton
+            [size]="'m'"
+            [routerLink]="['/dashboard']"
+          >
+            Главная страница
+          </button>
+        }
+      </p>
+    </ng-container>
 
 </tui-block-status>
+
+</div>
+

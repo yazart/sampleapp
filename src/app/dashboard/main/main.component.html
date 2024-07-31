@@ -15,6 +15,7 @@
         tuiCardMedium
         tuiSurface
         class="card"
+        [routerLink]="['../card', card.id]"
       >
         <div tuiCell="l">
           <div tuiTitle class="no-wrap" tuiFade>
@@ -28,8 +29,9 @@
           <tui-thumbnail-card
             size="m"
             [style.background-color]="'var(--tui-primary)'"
+            [paymentSystem]="card.cardProgram | paymentSystem"
+            [cardNumber]="'*'+ $any(card.number?.toString()?.split('')?.reverse()?.slice(0,4)?.reverse()?.join(''))"
           >
-              ...{{card.number?.toString()?.split("")?.reverse()?.slice(0,4)?.reverse()?.join('')}}
 
           </tui-thumbnail-card>
         </div>
@@ -81,6 +83,7 @@
         tuiCardMedium
         tuiSurface="flat"
         class="card"
+        [routerLink]="['../account', account.id]"
       >
         <div tuiCell="l">
           <div tuiTitle class="no-wrap" tuiFade>
