@@ -34,10 +34,5 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: async () =>
       import('./history/history.component').then((c) => c.HistoryComponent),
-  },
-  {
-    path: 'bot',
-    loadComponent: async () =>
-      import('./bot/bot.component').then((c)=> c.BotComponent)
   }
 ];

@@ -1,3 +1,72 @@
 <tui-root>
+  <div tuiHeader>
+    <div tuiTitle class="tui-space_left-8">
+      <logo class="tui-space_left-4"/>
+      <div tuiSubtitle class="tui-space_left-4">
+        Platform
+      </div>
+    </div>
+
+    <div tuiAccessories>
+      @if (userName$ | async){
+        <tui-hosted-dropdown
+          #host
+          tuiDropdownAlign="right"
+          [content]="dropdown"
+          [(open)]="open"
+        >
+          <tui-avatar
+            size="m"
+            [text]="(userName$ | async) || ''"
+            class="tui-space_vertical-1 tui-space_horizontal-4"
+          />
+        </tui-hosted-dropdown>
+        <ng-template
+          #dropdown
+          let-close="close"
+        >
+          <tui-data-list>
+            <tui-opt-group>
+              @for (item of items; track $index) {
+                <button
+                  tuiOption
+                  [routerLink]="item.route"
+                  (click)="host.close()"
+                >
+                  <tui-icon [icon]="item.icon"
+                            class="tui-space_right-2"
+                  />
+                  {{ item.name }}
+                </button>
+              }
+            </tui-opt-group>
+            <tui-opt-group>
+              <button
+                tuiOption
+                (click)="logout()"
+              >
+                Выход
+              </button>
+            </tui-opt-group>
+          </tui-data-list>
+        </ng-template>
+
+
+      } @else {
+        <button
+          appearance="flat"
+          tuiButton
+          size="m"
+          type="button"
+          class="tui-space_vertical-1 tui-space_horizontal-4"
+          [routerLink]="['/auth/login']"
+          routerLinkActive="hide"
+        >
+          Войти
+        </button>
+      }
+
+    </div>
+  </div>
   <router-outlet />
 </tui-root>
