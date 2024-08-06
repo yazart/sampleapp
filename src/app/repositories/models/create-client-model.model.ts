@@ -20,8 +20,6 @@ export interface CreateClientModel {
   readonly phoneNumber?: string;
   /* Адрес */
   readonly address?: string;
-  /* Требование сменить пароль */
-  readonly isMustChangePassword?: boolean;
   /* Пароль */
   readonly password?: string;
 }

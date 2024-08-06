@@ -31,9 +31,7 @@
             [style.background-color]="'var(--tui-primary)'"
             [paymentSystem]="card.cardProgram | paymentSystem"
             [cardNumber]="'*'+ $any(card.number?.toString()?.split('')?.reverse()?.slice(0,4)?.reverse()?.join(''))"
-          >
-
-          </tui-thumbnail-card>
+          />
         </div>
       </label>
     }
@@ -47,7 +45,7 @@
       <tui-icon
         icon="tuiIconPlusSquareLarge"
         class="plus"
-      ></tui-icon>
+      />
 
       <h2 tuiTitle>
         Новая
@@ -90,7 +88,7 @@
             <tui-money
               [currency]="account?.currency?.toString() || 'RUB'"
               [value]="account?.balance || 0"
-            ></tui-money>
+            />
             <div tuiSubtitle>Название счета{{account?.currency}}</div>
           </div>
         </div>
@@ -117,7 +115,7 @@
       <tui-icon
         icon="tuiIconPlusSquareLarge"
         class="plus"
-      ></tui-icon>
+      />
 
       <h2 tuiTitle>
         Новый

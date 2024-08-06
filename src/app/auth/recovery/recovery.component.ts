@@ -1,5 +1,4 @@
 import { AsyncPipe } from '@angular/common';
-import type { OnInit } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthorizationApiService, ClientsApiService } from '@api';
 import { MaskitoModule } from '@maskito/angular';
 import { maskitoWithPlaceholder } from '@maskito/kit';
@@ -37,12 +36,20 @@ import {
   TuiIslandModule,
   TuiProgressModule,
 } from '@taiga-ui/kit';
-import {BehaviorSubject, catchError, EMPTY, map, of, startWith, switchMap, tap} from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  EMPTY,
+  map,
+  of,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 import { LogoComponent } from '../../logo.component';
 import { AuthService } from '../auth.service';
 import { samePasswordValidator } from '../register/register.component';
-import {routes} from "../../app.routes";
 
 @Component({
   standalone: true,
@@ -73,7 +80,7 @@ import {routes} from "../../app.routes";
 })
 export class RecoveryComponent {
   private readonly alerts = inject(TuiAlertService);
-  private readonly router  = inject(Router);
+  private readonly router = inject(Router);
   private readonly crypto = inject(CRYPTO);
   private readonly destroyRef = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
@@ -139,7 +146,7 @@ export class RecoveryComponent {
   });
 
   protected next(): void {
-    const step = this.currenStep$.value;
+    const step: number = this.currenStep$.value;
 
     if (step === 1) {
       this.notify();
@@ -192,22 +199,25 @@ export class RecoveryComponent {
       .pipe(
         switchMap((pass) => this.auth.login(this.login.value || '', `${pass}`)),
         switchMap(() =>
-          this.clientApi.updateApiClientsPassword(
-           {
-              newPassword: this.passwordsForm.get('password')?.value || '',
-            },
-          ),
+          this.clientApi.updateApiClientsPassword({
+            newPassword: this.passwordsForm.get('password')?.value || '',
+          }),
         ),
-        catchError((e)=>{
-          this.alerts.open(`${e.error}`, {status: 'error'}).subscribe()
+        catchError((e: unknown) => {
+          const inner: { error: string } = e as { error: string };
+
+          this.alerts.open(`${inner.error}`, { status: 'error' }).subscribe();
+
           return EMPTY;
         }),
         tap(() => this.auth.logout()),
         tap(() => this.auth.recoveryProcess$.next(false)),
+        switchMap(() =>
+          this.alerts.open('Пароль обновлен', { status: 'success' }),
+        ),
       )
-      .subscribe(()=>{
-        this.router.navigate(['/','auth', 'login']).then()
-        this.alerts.open(`Пароль обновлен`, {status: 'success'}).subscribe()
+      .subscribe(() => {
+        this.router.navigate(['/', 'auth', 'login']).then();
       });
   }
 }

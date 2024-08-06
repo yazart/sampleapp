@@ -1,6 +1,12 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
+import { TuiSheetDialogModule } from '@taiga-ui/addon-mobile';
 import {
   TUI_SANITIZER,
   TuiAlertModule,
@@ -21,11 +27,10 @@ import {
 } from '@taiga-ui/experimental';
 import { TuiAvatarModule } from '@taiga-ui/kit';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
-import {filter, map, switchMap, tap} from 'rxjs';
+import { filter, map, switchMap } from 'rxjs';
 
 import { AuthService } from './auth/auth.service';
 import { LogoComponent } from './logo.component';
-import {TuiSheetDialogModule} from "@taiga-ui/addon-mobile";
 
 @Component({
   standalone: true,
@@ -70,9 +75,8 @@ export class AppComponent {
   ];
 
   protected readonly userName$ = this.auth.isAuthorized$.pipe(
-    filter(x=>!!x),
-    tap((x)=> console.log(x)),
-    switchMap(()=>this.auth.decodedToken$),
+    filter((x) => !!x),
+    switchMap(() => this.auth.decodedToken$),
     map((model) => {
       if (!model.lastName && !model.firstName) {
         return null;

@@ -1,11 +1,11 @@
-import {AsyncPipe, NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import type { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
 import { LogoComponent } from '../logo.component';
@@ -36,6 +36,8 @@ export class WelcomeComponent implements OnInit {
 
   public ngOnInit(): void {
     import('./img').then((e) => e.imgBuildings).then((d) => this.img$.next(d));
-    import('./pattern').then((e) => e.patternImg).then((d) => this.pattern$.next(d));
+    import('./pattern')
+      .then((e) => e.patternImg)
+      .then((d) => this.pattern$.next(d));
   }
 }

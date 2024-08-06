@@ -1,7 +1,8 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ClientsApiService } from '@api';
-import {NavigationComponent} from "../navigation/navigation.component";
+
+import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
   standalone: true,

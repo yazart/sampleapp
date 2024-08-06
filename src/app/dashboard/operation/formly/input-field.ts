@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component} from "@angular/core";
-import {FieldType, FormlyFieldConfig, FormlyFieldProps} from "@ngx-formly/core";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { FormlyFieldConfig, FormlyFieldProps } from '@ngx-formly/core';
+import { FieldType } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-formly-input',
@@ -10,7 +11,7 @@ import {FieldType, FormlyFieldConfig, FormlyFieldProps} from "@ngx-formly/core";
       [tuiTextfieldCleaner]="props.clean"
       class="tui-space_top-4"
     >
-      {{props.label}}
+      {{ props.label }}
       <input
         tuiTextfield
         [required]="props.required"
@@ -20,4 +21,12 @@ import {FieldType, FormlyFieldConfig, FormlyFieldProps} from "@ngx-formly/core";
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormlyInputType extends FieldType<FormlyFieldConfig<FormlyFieldProps & { clean: boolean, fieldType: 'text' | 'number', size: 's' | 'm' | 'l' }>> {}
+export class FormlyInputType extends FieldType<
+  FormlyFieldConfig<
+    FormlyFieldProps & {
+      clean: boolean;
+      fieldType: 'number' | 'text';
+      size: 'l' | 'm' | 's';
+    }
+  >
+> {}

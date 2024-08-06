@@ -1,5 +1,6 @@
 export { AccountModel } from './account-model.model';
 export { AccountUpdateModel } from './account-update-model.model';
+export { CardAccountModel } from './card-account-model.model';
 export { CardActivateModel } from './card-activate-model.model';
 export { CardModel } from './card-model.model';
 export { CardOrderModel } from './card-order-model.model';

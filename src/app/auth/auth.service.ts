@@ -4,8 +4,9 @@ import { AuthorizationApiService } from '@api';
 import { SESSION_STORAGE } from '@ng-web-apis/common';
 import { jwtDecode } from 'jwt-decode';
 import { DateTime } from 'luxon';
-import {BehaviorSubject, Observable, skipWhile} from 'rxjs';
+import type { Observable } from 'rxjs';
 import {
+  BehaviorSubject,
   catchError,
   exhaustMap,
   filter,
@@ -20,7 +21,6 @@ import {
 
 import type { JWTModel } from '../types/jwt.model';
 import { SKIP_HEADER } from './auth-interceptor.fn';
-import {Router} from "@angular/router";
 
 export const TOKEN_MODEL = 'tokenModel';
 
@@ -71,16 +71,15 @@ export class AuthService {
 
   public token$ = this.tokenModel$.pipe(
     map((model) => model?.accessToken || null),
-
   );
+
   public isAuthorized$ = this.token$.pipe(
     map((token): boolean => !!token),
     withLatestFrom(this.recoveryProcess$),
-    map(([isAuthorized, recoveryIsRunning]: [boolean, boolean])=>{
-      return recoveryIsRunning? false: isAuthorized;
-    })
+    map(([isAuthorized, recoveryIsRunning]: [boolean, boolean]) =>
+      recoveryIsRunning ? false : isAuthorized,
+    ),
   );
-
 
   public decodedToken$ = this.token$.pipe(
     map((token) => (token ? jwtDecode<JWTModel>(token) : {})),

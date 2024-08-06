@@ -103,7 +103,7 @@ export class OperationsApiService {
 
     return this.http.put<OperationInfo>(
       `${this.uri}/api/operations`,
-      /* `put` */ payload,
+      /* `put` */ JSON.stringify(payload),
       options,
     );
   }

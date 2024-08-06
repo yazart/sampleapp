@@ -6,7 +6,7 @@
           [src]="transaction.state === state.Hold? 'tuiIconClock':transaction.state === state.Canceled? 'tuiIconAlertCircle':'tuiIconCheckCircle'"
           [appearance]="transaction.state === state.Hold? 'neutral':transaction.state === state.Canceled? 'error':'success'"
           tuiAccessories
-        ></tui-avatar>
+        />
         <div tuiTitle>
           <strong>{{transaction.receiver}}</strong>
           <div tuiSubtitle>{{ (transaction.paymentDate? transaction.paymentDate : transaction.date ) | date: "dd.MM.YYYY" }}</div>
@@ -22,9 +22,7 @@
             [style.color]="transaction.type === ttype.Income?'var(--tui-positive)':'var(--tui-negative)'"
             [currency]="'RUB'"
             [value]="(transaction.type === ttype.Expense? -(transaction.amount||0):( transaction.amount||0))"
-          >
-
-          </tui-money>
+          />
         </div>
       </div>
     }

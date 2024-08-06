@@ -1,12 +1,17 @@
-import {NgModule} from "@angular/core";
-import {FormlyInputType} from "./input-field";
-import {FormlyModule} from "@ngx-formly/core";
-import {ControlTypeConstant} from "./control-type.constant";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TuiDataListWrapperModule, TuiInputModule, TuiSelectModule} from "@taiga-ui/kit";
-import {TuiTextfieldControllerModule} from "@taiga-ui/core";
-import {AsyncPipe} from "@angular/common";
-import {FormlySelectType} from "./select-field";
+import { AsyncPipe } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import {
+  TuiDataListWrapperModule,
+  TuiInputModule,
+  TuiSelectModule,
+} from '@taiga-ui/kit';
+
+import { ControlTypeConstant } from './control-type.constant';
+import { FormlyInputType } from './input-field';
+import { FormlySelectType } from './select-field';
 
 @NgModule({
   imports: [
@@ -16,23 +21,20 @@ import {FormlySelectType} from "./select-field";
       types: [
         {
           name: ControlTypeConstant.Input,
-          component: FormlyInputType
+          component: FormlyInputType,
         },
         {
           name: ControlTypeConstant.Select,
-          component: FormlySelectType
-        }
-      ]
+          component: FormlySelectType,
+        },
+      ],
     }),
     FormsModule,
     TuiInputModule,
     TuiTextfieldControllerModule,
     TuiDataListWrapperModule,
-    TuiSelectModule
+    TuiSelectModule,
   ],
-  declarations: [
-    FormlyInputType,
-    FormlySelectType
-  ]
+  declarations: [FormlyInputType, FormlySelectType],
 })
-export class FormlyConfigModule{}
+export class FormlyConfigModule {}

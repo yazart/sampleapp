@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import type { AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import type { CreateClientModel } from '@api';
 import { ClientsApiService, SexType } from '@api';
 import { TuiDay } from '@taiga-ui/cdk';
@@ -24,7 +24,7 @@ import {
   TuiRadioBlockModule,
   TuiRadioLabeledModule,
 } from '@taiga-ui/kit';
-import {catchError, EMPTY, map, startWith} from 'rxjs';
+import { catchError, EMPTY, map, startWith, switchMap } from 'rxjs';
 
 import { formExtractorFn } from '../../form-utils/form-extractor.fn';
 import { LogoComponent } from '../../logo.component';
@@ -84,9 +84,8 @@ export const samePasswordValidator = (
   styleUrl: 'register.component.scss',
 })
 export class RegisterComponent {
-
   private readonly alerts = inject(TuiAlertService);
-  private readonly router  = inject(Router);
+  private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly api = inject(ClientsApiService);
   private readonly currentDay = new Date();
@@ -142,14 +141,21 @@ export class RegisterComponent {
           [SKIP_HEADER]: `${SKIP_HEADER}`,
         })
         .pipe(
-          catchError((e)=>{
-            this.alerts.open(`${e.error}`, {status: 'error'}).subscribe()
+          catchError((e: unknown) => {
+            const inner: { error: string } = e as { error: string };
+
+            this.alerts.open(`${inner.error}`, { status: 'error' }).subscribe();
+
             return EMPTY;
-          })
+          }),
+          switchMap(() =>
+            this.alerts.open('Регистрация прошла успешно, авторизуйтесь!', {
+              status: 'success',
+            }),
+          ),
         )
         .subscribe(() => {
-          this.alerts.open(`Регистрация прошла успешно, авторизуйтесь!`, {status: 'success'}).subscribe();
-          this.router.navigate(['/', 'auth', 'login']).then()
+          this.router.navigate(['/', 'auth', 'login']).then();
         });
     }
   }

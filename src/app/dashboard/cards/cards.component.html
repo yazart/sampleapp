@@ -1,1 +1,25 @@
-<p>cards works!</p>
+@if (card$ | async; as card) {
+  <div tuiHeader="xxl">
+    <h1 tuiTitle>
+      {{card?.product?.name}}
+      <div tuiSubtitle>{{card?.number}}</div>
+    </h1>
+
+    <div tuiAccessories>
+      <tui-badge-notification>1</tui-badge-notification>
+      <button
+        size="l"
+        tuiButton
+      >
+        {{card?.cardProgram | paymentSystem}}
+      </button>
+    </div>
+  </div>
+
+
+  <pre>
+    {{card$ | async | json}}
+  </pre>
+} @else {
+  Нет карты
+}

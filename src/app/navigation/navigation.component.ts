@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {TuiButtonGroupModule, TuiIconModule, TuiSegmentedModule, TuiSurfaceModule} from "@taiga-ui/experimental";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {TuiTabBarModule} from "@taiga-ui/addon-mobile";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TuiTabBarModule } from '@taiga-ui/addon-mobile';
+import { TuiIconModule, TuiSegmentedModule } from '@taiga-ui/experimental';
 
 @Component({
-  selector: 'app-navigation',
   standalone: true,
+  selector: 'app-navigation',
   imports: [
     TuiIconModule,
     RouterLink,
@@ -14,9 +14,7 @@ import {TuiTabBarModule} from "@taiga-ui/addon-mobile";
     TuiTabBarModule,
   ],
   templateUrl: './navigation.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './navigation.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationComponent {
-
-}
+export class NavigationComponent {}

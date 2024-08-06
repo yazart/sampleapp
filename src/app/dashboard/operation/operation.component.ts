@@ -1,72 +1,80 @@
-import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
-import {POLYMORPHEUS_CONTEXT} from "@tinkoff/ng-polymorpheus";
-import {AsyncPipe, JsonPipe} from "@angular/common";
-import {FormlyFieldConfig, FormlyModule} from "@ngx-formly/core";
-import {FormGroup} from "@angular/forms";
-import {BehaviorSubject, map, startWith} from "rxjs";
-import {OperationBuilderService} from "./operation-builder.service";
-import {type OperationInfo, OperationsApiService} from "@api";
-import {FormlyConfigModule} from "./formly/formly.module";
-import {TuiButtonModule} from "@taiga-ui/core";
-import {TuiTitleModule} from "@taiga-ui/experimental";
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import type { OperationInfo } from '@api';
+import { OperationsApiService } from '@api';
+import type { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyModule } from '@ngx-formly/core';
+import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiTitleModule } from '@taiga-ui/experimental';
+import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
+import { BehaviorSubject, map, startWith } from 'rxjs';
+
+import { FormlyConfigModule } from './formly/formly.module';
+import { OperationBuilderService } from './operation-builder.service';
 
 @Component({
-  selector: 'app-operation',
   standalone: true,
+  selector: 'app-operation',
   imports: [
     JsonPipe,
     FormlyModule,
     AsyncPipe,
     FormlyConfigModule,
     TuiButtonModule,
-    TuiTitleModule
+    TuiTitleModule,
   ],
   templateUrl: './operation.component.html',
-  styleUrl: './operation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [OperationBuilderService]
+  providers: [OperationBuilderService],
+  styleUrl: './operation.component.scss',
 })
 export class OperationComponent {
+  private readonly operationApi = inject(OperationsApiService);
   public readonly loading$ = new BehaviorSubject<boolean>(false);
   public readonly form = new FormGroup({});
   public readonly formValid$ = this.form.statusChanges.pipe(
-    map((status)=>status !== 'VALID'),
+    map((status) => status !== 'VALID'),
     startWith(true),
   );
+
   public readonly context = inject(POLYMORPHEUS_CONTEXT);
   public readonly builder = inject(OperationBuilderService);
-  public readonly rawOperation = new BehaviorSubject<OperationInfo>(this.context['data']);
+  public readonly rawOperation = new BehaviorSubject<OperationInfo>(
+    this.context['data'],
+  );
+
   public readonly finalStep$ = this.rawOperation.pipe(
-    map(op=> op.isFinished)
-  )
-  public readonly title$ = this.rawOperation.pipe(map((op)=>{
-    return op.name;
-  }));
+    map((op) => op.isFinished),
+  );
+
+  public readonly title$ = this.rawOperation.pipe(map((op) => op.name));
+
   public readonly formlyFieldConfig$ = this.rawOperation.pipe(
-    map((operation: OperationInfo): FormlyFieldConfig[]=>{
-      return this.builder.build(operation)
-    })
-  )
+    map((operation: OperationInfo): FormlyFieldConfig[] =>
+      this.builder.build(operation),
+    ),
+  );
 
-  constructor(private readonly operationApi: OperationsApiService) {
-  }
-
-  next(): void {
+  protected next(): void {
     this.loading$.next(true);
-    this.operationApi.updateApiOperations1(
-      Object.entries(this.form.getRawValue()).map(([key, value])=>{
-      return {
-        identifier: key,
-        value: value as string,
-      };
-    }), this.rawOperation.getValue().requestId).subscribe((e)=>{
-      this.loading$.next(false);
-      this.rawOperation.next(e);
-    })
+    this.operationApi
+      .updateApiOperations1(
+        Object.entries(this.form.getRawValue()).map(([key, value]) => ({
+          identifier: key,
+          value: value as string,
+        })),
+        this.rawOperation.getValue().requestId,
+      )
+      .subscribe((e) => {
+        this.loading$.next(false);
+        this.rawOperation.next(e);
+      });
   }
-  confirm():void {
-    this.operationApi.sendApiOperations(this.rawOperation.getValue().requestId).subscribe((e)=>{
-      console.log(e);
-    })
+
+  protected confirm(): void {
+    this.operationApi
+      .sendApiOperations(this.rawOperation.getValue().requestId)
+      .subscribe((_e) => {});
   }
 }

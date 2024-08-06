@@ -1,7 +1,7 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   TuiAlertService,
   TuiButtonModule,
@@ -16,7 +16,7 @@ import {
   TuiInputPasswordModule,
   TuiIslandModule,
 } from '@taiga-ui/kit';
-import { map, startWith } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs';
 
 import { LogoComponent } from '../../logo.component';
 import { AuthService } from '../auth.service';
@@ -67,19 +67,34 @@ export class LoginComponent {
       const { login, password } = this.loginForm.getRawValue();
 
       if (login && password) {
-        this.auth.login(login, password).subscribe((e) => {
-          if(!e){
-            this.alerts.open(`Логин или пароль введены неверно, либо пользователя не существует`, {status: 'error'}).subscribe()
-            return;
-          }
-            this.alerts.open(`Вы успешно авторизовались`, {status: 'success'}).subscribe()
-            this.router.navigate(['/', 'dashboard']).then();
+        this.auth
+          .login(login, password)
+          .pipe(
+            switchMap((e) => {
+              if (!e) {
+                return this.alerts
+                  .open(
+                    'Логин или пароль введены неверно, либо пользователя не существует',
+                    { status: 'error' },
+                  )
+                  .pipe(map(() => e));
+              }
 
+              return this.alerts
+                .open('Вы успешно авторизовались', { status: 'success' })
+                .pipe(map(() => e));
+            }),
+          )
 
-
-        });
+          .subscribe((e) => {
+            if (e) {
+              this.router.navigate(['/', 'dashboard']).then();
+            }
+          });
       } else {
-        this.alerts.open(`Введены не все параметры для авторизации`, {status: 'error'}).subscribe()
+        this.alerts
+          .open('Введены не все параметры для авторизации', { status: 'error' })
+          .subscribe();
       }
     }
   }

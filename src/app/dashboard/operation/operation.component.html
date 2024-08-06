@@ -1,8 +1,6 @@
 <h2 tuiTitle="m">{{title$ | async }}</h2>
 
-  <formly-form [form]="form" [fields]="(formlyFieldConfig$|async) || []">
-
-  </formly-form>
+  <formly-form [form]="form" [fields]="(formlyFieldConfig$|async) || []" />
 <div class="tui-form__buttons">
   <button
     size="l"

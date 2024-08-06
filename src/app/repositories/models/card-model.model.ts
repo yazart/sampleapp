@@ -1,10 +1,11 @@
 // Automatically generated - do not modify!
 
-import type { CardState, ClientModel, ProductModel } from '.';
+import type { CardAccountModel, CardState, ClientModel, ProductModel } from '.';
 
 export interface CardModel {
   /* ID карты */
   readonly id?: number;
+  readonly account?: CardAccountModel;
   readonly client?: ClientModel;
   /* Программа выпуска */
   readonly cardProgram?: string;

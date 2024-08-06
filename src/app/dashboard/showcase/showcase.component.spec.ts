@@ -1,4 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ShowcaseComponent } from './showcase.component';
 
@@ -8,10 +10,9 @@ describe('ShowcaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShowcaseComponent]
-    })
-    .compileComponents();
-    
+      imports: [ShowcaseComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ShowcaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
